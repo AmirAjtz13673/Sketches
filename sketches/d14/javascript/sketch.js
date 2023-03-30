@@ -7,7 +7,7 @@ function draw() {
   background(7,8,8);
   noStroke();
   
-  // зуярь пятиугольники
+  // draw multiple rotating polygons in the background
   for (let i = 0; i < 20; i++) {
     push();
     translate(random(width), random(height));

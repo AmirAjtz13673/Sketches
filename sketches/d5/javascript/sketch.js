@@ -11,10 +11,12 @@ function setup() {
 
 function draw() {
 
+
   stroke(255);
   strokeWeight(4);
   
-
+  /*textSize(500);
+  text("I", x, y);*/
   
 
   for (let i = 0; i < 0.1; i++) {

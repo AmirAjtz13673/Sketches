@@ -1,35 +1,108 @@
-let x, y; // variables to store the position of the letter
-let dragging = false; // variable to track if the user is dragging the letter
 
+const canvasWidth = 600;
+const canvasHeight = 400;
+
+
+let letterI;
+let rectangles = [];
+
+// хуярь канвас
 function setup() {
-  createCanvas(1000, 1000);
-  x = width / 2; // center the letter horizontally
-  y = height / 2; // center the letter vertically
-}
+  createCanvas(canvasWidth, canvasHeight);
+  frameRate(60);
 
-function draw() {
-  background(0); // black background
-  textSize(500); // large font size
-  fill(255); // white text color
-  textAlign(CENTER, CENTER); // center the text horizontally and vertically
-  text("I", x, y); // draw the letter at the current position
-}
+  // создать буквочку
+  letterI = new LetterI(width/2, height/2);
 
-function mousePressed() {
-  // check if the mouse is over the letter
-  let d = dist(mouseX, mouseY, x, y);
-  if (d < 50) {
-    dragging = true; // start dragging
+  // ебашь прямоуг
+  for (let i = 0; i < 5; i++) {
+    addRectangle();
   }
 }
 
-function mouseReleased() {
-  dragging = false; // stop dragging
+// хуяррь круговую 
+function draw() {
+  background(0);
+
+
+  for (let i = 0; i < rectangles.length; i++) {
+    rectangles[i].draw();
+  }
+
+
+  letterI.update();
+  letterI.draw();
+
+
+  if (random() < 0.05) {
+    addRectangle();
+  }
 }
 
-function mouseDragged() {
-  if (dragging) {
-    x = mouseX; // update the position of the letter
-    y = mouseY;
+
+function addRectangle() {
+  const newRectangle = new Rectangle();
+  rectangles.push(newRectangle);
+}
+
+
+class Rectangle {
+  constructor() {
+    this.x = random(width);
+    this.y = random(height);
+    this.width = random(20, 50);
+    this.height = random(20, 50);
+    this.color = color(random(255), random(255), random(255), 100);
+    this.life = 60;
+  }
+
+
+  update() {
+    this.life--;
+  }
+
+
+  draw() {
+    if (this.life > 0) {
+      fill(this.color);
+      noStroke();
+      rect(this.x, this.y, this.width, this.height);
+    }
+  }
+}
+
+
+class LetterI {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.color = color(255);
+    this.alpha = 0;
+    this.alphaDir = 5;
+  }
+
+
+  update() {
+
+    this.x += random(-1, 1);
+    this.y += random(-1, 1);
+
+
+    if (this.alpha <= 0 || this.alpha >= 255) {
+      this.alphaDir *= -1;
+    }
+    this.alpha += this.alphaDir;
+  }
+
+
+  draw() {
+    fill(this.color);
+    noStroke();
+    textSize(200);
+    textAlign(CENTER, CENTER);
+    textStyle(BOLD);
+    text("I", this.x, this.y);
+    fill(255, 255, 255, this.alpha);
+    rect(0, 0, width, height);
   }
 }

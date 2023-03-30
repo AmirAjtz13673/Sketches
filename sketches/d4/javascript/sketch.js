@@ -13,7 +13,7 @@ function setup() {
 function draw() {
   background('#1b1b2f');
 
-  for (let i = 0; i < particles.length; i++) {//ебашь точки
+  for (let i = 0; i < particles.length; i++) {//ебашу точки
     particles[i].show();
   }
 

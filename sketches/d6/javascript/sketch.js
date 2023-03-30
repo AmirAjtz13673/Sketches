@@ -1,35 +1,35 @@
-let x, y; // variables to store the position of the letter
-let dragging = false; // variable to track if the user is dragging the letter
+let x, y; 
+let dragging = false; 
 
 function setup() {
   createCanvas(1000, 1000);
-  x = width / 2; // center the letter horizontally
-  y = height / 2; // center the letter vertically
+  x = width / 2; 
+  y = height / 2; 
 }
 
 function draw() {
-  background(0); // black background
-  textSize(500); // large font size
-  fill(255); // white text color
-  textAlign(CENTER, CENTER); // center the text horizontally and vertically
-  text("I", x, y); // draw the letter at the current position
+  background(0); 
+  textSize(500); 
+  fill(255); 
+  textAlign(CENTER, CENTER); 
+  text("I", x, y); 
 }
 
 function mousePressed() {
-  // check if the mouse is over the letter
+
   let d = dist(mouseX, mouseY, x, y);
   if (d < 50) {
-    dragging = true; // start dragging
+    dragging = true; 
   }
 }
 
 function mouseReleased() {
-  dragging = false; // stop dragging
+  dragging = false; 
 }
 
 function mouseDragged() {
   if (dragging) {
-    x = mouseX; // update the position of the letter
+    x = mouseX; 
     y = mouseY;
   }
 }

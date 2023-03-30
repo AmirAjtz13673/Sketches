@@ -1,35 +1,35 @@
-let x, y; // variables to store the position of the letter
-let dragging = false; // variable to track if the user is dragging the letter
-
 function setup() {
-  createCanvas(1000, 1000);
-  x = width / 2; // center the letter horizontally
-  y = height / 2; // center the letter vertically
+  createCanvas(400, 400);
 }
 
 function draw() {
-  background(0); // black background
-  textSize(500); // large font size
-  fill(255); // white text color
-  textAlign(CENTER, CENTER); // center the text horizontally and vertically
-  text("I", x, y); // draw the letter at the current position
+  background(220);
+
+
+  strokeWeight(10);
+  line(200, 50, 200, 350);
+
+
+  drawFlower(150, 100);
+  drawFlower(250, 100);
+  drawFlower(150, 300);
+  drawFlower(250, 300);
 }
 
-function mousePressed() {
-  // check if the mouse is over the letter
-  let d = dist(mouseX, mouseY, x, y);
-  if (d < 50) {
-    dragging = true; // start dragging
-  }
-}
+function drawFlower(x, y) {
 
-function mouseReleased() {
-  dragging = false; // stop dragging
-}
+  strokeWeight(5);
+  stroke(0, 128, 0);
+  line(x, y, x, y + 100);
 
-function mouseDragged() {
-  if (dragging) {
-    x = mouseX; // update the position of the letter
-    y = mouseY;
-  }
+
+  noStroke();
+  fill(255, 204, 0);
+  ellipse(x - 25, y, 50, 50);
+  ellipse(x + 25, y, 50, 50);
+  ellipse(x, y - 25, 50, 50);
+  ellipse(x, y + 25, 50, 50);
+
+  fill(255, 0, 0);
+  ellipse(x, y, 25, 25);
 }
